@@ -1,9 +1,8 @@
 <?php
 App::uses('AppModel', 'Model');
-App::import('Vendor', 'twilio-php');
-App::import('Vendor', 'twilio-php/Twilio/Rest/Client');
 
-//use Twilio\Rest\Client;
+require_once('../Vendor/twilio-php-master/Twilio/autoload.php');
+use Twilio\Rest\Client;
 /**
  * Message Model
  *
@@ -34,11 +33,12 @@ class Message extends AppModel {
 		$token = 'd8e9133579b24a49129d248247925606';
 		
 		$client = new Twilio\Rest\Client($sid, $token);
+		
 		$message = $client->messages->create(
-		  '9557020921', // Text this number
+		  $to, // Text this number
 		  array(
 		    'from' => '+13344582546', // From a valid Twilio number
-		    'body' => 'Hello from Twilio!'
+		    'body' => $message
 		  )
 		);
 	}
